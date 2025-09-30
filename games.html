@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - Wild West Slots</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(139, 69, 19, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #FFD700;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #FFD700;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #FFD700;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Back to Home Button */
+        .back-home {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            background: rgba(255, 215, 0, 0.9);
+            color: #8B4513;
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .back-home:hover {
+            background: #FFD700;
+            transform: translateX(5px);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><pattern id="wood" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="%238B4513"/><path d="M0 50h100M50 0v100" stroke="%23A0522D" stroke-width="2"/></pattern></defs><rect width="1200" height="400" fill="url(%23wood)"/></svg>') center/cover;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            color: #FFD700;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Coming Soon Section */
+        .coming-soon {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .coming-soon-content {
+            background: rgba(255,255,255,0.1);
+            padding: 60px 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,215,0,0.3);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .coming-soon-icon {
+            font-size: 5rem;
+            color: #FFD700;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .coming-soon h2 {
+            font-size: 3rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .coming-soon p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: rgba(255,215,0,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 100px;
+            border: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FFD700;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            color: #fff;
+            margin-top: 5px;
+        }
+
+        .notify-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #8B4513;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255,215,0,0.3);
+            margin-top: 30px;
+        }
+
+        .notify-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255,215,0,0.5);
+            background: linear-gradient(45deg, #FFA500, #FFD700);
+        }
+
+        /* Preview Games */
+        .preview-games {
+            padding: 80px 0;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .preview-title {
+            font-size: 2.5rem;
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .game-preview {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,215,0,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .game-preview:hover {
+            transform: translateY(-10px);
+            border-color: #FFD700;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .game-preview::before {
+            content: 'COMING SOON';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 0, 0, 0.8);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .game-image {
+            height: 200px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #8B4513;
+            position: relative;
+        }
+
+        .game-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .game-info {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .game-info h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .game-info p {
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .game-features {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .feature-tag {
+            background: rgba(255,215,0,0.2);
+            color: #FFD700;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        /* Newsletter Signup */
+        .newsletter {
+            padding: 80px 0;
+            background: rgba(139, 69, 19, 0.1);
+        }
+
+        .newsletter-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .newsletter p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1rem;
+            min-width: 250px;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: #FFD700;
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 15px rgba(255,215,0,0.3);
+        }
+
+        .newsletter-form button {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #8B4513;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255,215,0,0.3);
+            white-space: nowrap;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255,215,0,0.5);
+            background: linear-gradient(45deg, #FFA500, #FFD700);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(139, 69, 19, 0.95);
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #FFD700;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,215,0,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFD700;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #FFD700;
+            color: #8B4513;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,215,0,0.3);
+            padding-top: 20px;
+            margin-top: 30px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 3rem;
+            }
+            
+            .coming-soon h2 {
+                font-size: 2.5rem;
+            }
+            
+            .countdown {
+                gap: 20px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .back-home {
+                left: 10px;
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .coming-soon-content {
+                padding: 40px 20px;
+            }
+            
+            .coming-soon h2 {
+                font-size: 2rem;
+            }
+            
+            .countdown {
+                gap: 15px;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 15px;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .newsletter-form input {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .page-header {
+                padding: 100px 0 60px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .coming-soon {
+                padding: 60px 0;
+            }
+            
+            .preview-games {
+                padding: 60px 0;
+            }
+            
+            .newsletter {
+                padding: 60px 0;
+            }
+            
+            .coming-soon-icon {
+                font-size: 4rem;
+            }
+            
+            .countdown {
+                gap: 10px;
+            }
+            
+            .countdown-item {
+                min-width: 70px;
+                padding: 10px;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .coming-soon h2 {
+                font-size: 1.8rem;
+            }
+            
+            .newsletter h2 {
+                font-size: 2rem;
+            }
+            
+            .preview-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <i class="fas fa-star"></i> Wild West Slots
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="games.html" class="active">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-home">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content fade-in-up">
+                <h1><i class="fas fa-gamepad"></i> Games</h1>
+                <p>Get ready for an amazing collection of Wild West themed slot games! Our exciting games are coming soon.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon">
+        <div class="container">
+            <div class="coming-soon-content scroll-animate">
+                <div class="coming-soon-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h2>Games Coming Soon!</h2>
+                <p>
+                    We're working hard to bring you an incredible collection of Wild West themed slot games. 
+                    Each game will feature unique characters, exciting bonus rounds, and stunning graphics that 
+                    capture the spirit of the Wild West era.
+                </p>
+                <p>
+                    Our development team is putting the finishing touches on games that will include cowboys, 
+                    horses, revolvers, golden treasures, and much more. Stay tuned for updates!
+                </p>
+                
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">30</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">12</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">45</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">30</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+                
+                <button class="notify-btn" onclick="notifyMe()">
+                    <i class="fas fa-bell"></i> Notify Me When Ready
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Games -->
+    <section class="preview-games">
+        <div class="container">
+            <h2 class="preview-title scroll-animate">Upcoming Games Preview</h2>
+            <div class="games-grid">
+                <div class="game-preview scroll-animate">
+                    <div class="game-image">
+                        <i class="fas fa-user-ninja"></i>
+                    </div>
+                    <div class="game-info">
+                        <h3>Wild West Outlaw</h3>
+                        <p>Join the legendary outlaws in this thrilling slot adventure! Experience the excitement of the Wild West with bonus rounds and free spins.</p>
+                        <div class="game-features">
+                            <span class="feature-tag">5 Reels</span>
+                            <span class="feature-tag">25 Paylines</span>
+                            <span class="feature-tag">Bonus Rounds</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-preview scroll-animate">
+                    <div class="game-image">
+                        <i class="fas fa-horse"></i>
+                    </div>
+                    <div class="game-info">
+                        <h3>Golden Horse</h3>
+                        <p>Ride the golden horse to victory! This exciting slot features wild symbols, scatter pays, and progressive jackpots.</p>
+                        <div class="game-features">
+                            <span class="feature-tag">3 Reels</span>
+                            <span class="feature-tag">Classic Style</span>
+                            <span class="feature-tag">Wild Symbols</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-preview scroll-animate">
+                    <div class="game-image">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="game-info">
+                        <h3>Desert Gold</h3>
+                        <p>Search for hidden treasures in the desert sands! Discover ancient artifacts and unlock massive rewards.</p>
+                        <div class="game-features">
+                            <span class="feature-tag">6 Reels</span>
+                            <span class="feature-tag">Mega Ways</span>
+                            <span class="feature-tag">Free Spins</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-preview scroll-animate">
+                    <div class="game-image">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="game-info">
+                        <h3>Sheriff's Badge</h3>
+                        <p>Wear the sheriff's badge and bring justice to the Wild West! This law enforcement themed slot offers exciting gameplay.</p>
+                        <div class="game-features">
+                            <span class="feature-tag">5 Reels</span>
+                            <span class="feature-tag">40 Paylines</span>
+                            <span class="feature-tag">Multiplier</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-preview scroll-animate">
+                    <div class="game-image">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="game-info">
+                        <h3>Saloon Showdown</h3>
+                        <p>Step into the saloon for the ultimate showdown! Experience intense action with expanding wilds and bonus features.</p>
+                        <div class="game-features">
+                            <span class="feature-tag">5 Reels</span>
+                            <span class="feature-tag">243 Ways</span>
+                            <span class="feature-tag">Expanding Wilds</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-preview scroll-animate">
+                    <div class="game-image">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="game-info">
+                        <h3>Gold Rush</h3>
+                        <p>Join the gold rush and strike it rich! This mining themed slot features cascading reels and progressive multipliers.</p>
+                        <div class="game-features">
+                            <span class="feature-tag">5 Reels</span>
+                            <span class="feature-tag">Cascading</span>
+                            <span class="feature-tag">Progressive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content scroll-animate">
+                <h2>Stay Updated!</h2>
+                <p>Be the first to know when our Wild West slot games are ready to play. Subscribe to our newsletter for exclusive updates and early access.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Wild West Slots</h3>
+                    <p>Experience the thrill of the Wild West with our exciting demo slot games. Play for fun, no real money required.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="games.html">Games</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="responsible.html">Responsible Gaming</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Wild West Slots. All rights reserved. Demo games only - No real money gambling.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const launchDate = new Date().getTime() + (30 * 24 * 60 * 60 * 1000); // 30 days from now
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            if (distance < 0) {
+                document.getElementById("days").innerHTML = "0";
+                document.getElementById("hours").innerHTML = "0";
+                document.getElementById("minutes").innerHTML = "0";
+                document.getElementById("seconds").innerHTML = "0";
+            }
+        }
+
+        // Notify Me Function
+        function notifyMe() {
+            alert('Thank you! We\'ll notify you as soon as our games are ready to play. Make sure to check your email for updates!');
+        }
+
+        // Newsletter Form
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            
+            if (email) {
+                alert('Thank you for subscribing! You\'ll receive updates about our upcoming games.');
+                this.reset();
+            }
+        });
+
+        // Scroll Animation
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Smooth Scrolling
+        function smoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize all functions
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            handleScrollAnimation();
+            toggleMobileMenu();
+            smoothScrolling();
+        });
+
+        // Handle scroll events
+        window.addEventListener('scroll', handleScrollAnimation);
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
